@@ -1,0 +1,441 @@
+nodejs项目源码安装学习
+
+《第一步》  检查node npm 是否安装
+
+检查本地是否安装node npm
+
+bogon:~ admindyn$ node -v
+v6.9.5
+
+《第二步》  
+检查npm包管理工具模块组件node_modules默认安装全局路径
+
+mac node模块组件的全局安装默认目录查看npm -i
+
+bogon:backgroundmanagement-master admindyn$ npm -i
+(node:5328) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5328) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5328) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, edit, explore, get,
+    help, help-search, i, init, install, install-test, it, link,
+    list, ln, login, logout, ls, outdated, owner, pack, ping,
+    prefix, prune, publish, rb, rebuild, repo, restart, root,
+    run, run-script, s, se, search, set, shrinkwrap, star,
+    stars, start, stop, t, tag, team, test, tst, un, uninstall,
+    unpublish, unstar, up, update, v, version, view, whoami
+
+npm <cmd> -h     quick help on <cmd>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /Users/admindyn/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@3.10.10 /usr/local/lib/node_modules/npm
+
+---------------------
+
+《第三步》  由于使用的是express框架检查npm是否安装
+执行 sudo npm install express-generator -g 安装的是模版生成脚本
+这个建议安装到全局
+我们这里安装到默认全局路径 而且这里安装的express的框架模本生成脚本
+并不是express框架核心本身
+执行 npm install express 就把express安装到本地路径
+执行 npm install express -g 就把express安装到默认的全局路径
+而对于核心的express组件建议安装到工程目录去
+
+
+
+安装express 支持nodejs服务的框架
+
+sudo npm install express-generator -g
+
+/usr/local/bin/express -> /usr/local/lib/node_modules/express-generator/bin/express-cli.js
+/usr/local/lib
+└─┬ express-generator@4.15.0 
+  ├─┬ commander@2.9.0 
+  │ └── graceful-readlink@1.0.1 
+  ├── ejs@2.5.6 
+  ├─┬ mkdirp@0.5.1 
+  │ └── minimist@0.0.8 
+  └── sorted-object@2.0.1 
+
+bogon:lib admindyn$ 
+
+安装的这个express 命令 是用来随时在我们指定的目录下生成express nodejs框架默认文件 文件夹的 也会自动帮我们以指定的目录名生成工程名的 package.json
+文件
+
+《第四步》
+尝试启动服务 到下载的源码目录下 找到有package.json的文件夹下
+4.1
+执行npm start 否则报错 提示缺少package.json文件
+当然这个文件自己也可以生成
+但是我们这里下载的是别人的源码 源码中肯定有
+
+我们下载的源码的package.json文件在newexpress文件夹下 使用的是express框架
+
+我们可以和express生成脚本生成的框架模版做对比 学习express的知识 放便使用
+4.2
+如果有package.json 我们执行npm start 如果文件中表明需要的第三方组件
+包没有安装到本地 也会报错 报错提示 对应的模块组件 缺少
+执行安装缺少的模块 但是要注意 因为 我们这里要本地工程安装 而不是全局 所以要注意安装目录
+应该选择和app.js所在目录安装 先创建node_modules目录 然后在app.js 所在目录 执行命令
+npm install express
+npm install serve-favicon
+ npm install morgan
+ npm install cookie-parser
+npm install body-parser
+npm install mysql
+npm start 启动成功 
+到newexpress的bin目录下 www文件 查看 找到端口号 '3100'
+
+《第五步》http://localhost:3100
+访问后报错  网页提示缺少 jade模块
+bogon:~ admindyn$ cd /Users/admindyn/Desktop/backgroundmanagement-master 
+bogon:backgroundmanagement-master admindyn$ cd newexpress/
+bogon:newexpress admindyn$ ls -la
+total 48
+drwxr-xr-x@ 14 admindyn  staff    476  4 13 17:37 .
+drwxr-xr-x@ 13 admindyn  staff    442  4 13 16:51 ..
+-rw-r--r--@  1 admindyn  staff  10244  4 13 17:36 .DS_Store
+-rwxr-xr-x@  1 admindyn  staff   1920  4 13 17:10 app.js
+drwxr-xr-x@  3 admindyn  staff    102 11 10 19:31 bin
+drwxr-xr-x@  3 admindyn  staff    102 11 10 19:31 conf
+-rwxr-xr-x@  1 admindyn  staff   1707 11 10 19:31 express.sql
+drwxr-xr-x@  4 admindyn  staff    136 11 10 19:31 good
+drwxr-xr-x  62 admindyn  staff   2108  4 13 17:31 node_modules
+-rwxr-xr-x@  1 admindyn  staff    382 11 10 19:31 package.json
+drwxr-xr-x@  4 admindyn  staff    136  4 13 16:57 public
+drwxr-xr-x@  4 admindyn  staff    136 11 10 19:31 routes
+drwxr-xr-x@  3 admindyn  staff    102  4 13 16:57 util
+drwxr-xr-x@  5 admindyn  staff    170 11 10 19:31 views
+bogon:newexpress admindyn$ npm install jade
+
+《第六步》
+切换到项目目录
+
+直接npm start 会报错
+
+
+bogon:backgroundmanagement-master admindyn$ npm start
+(node:5652) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5652) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5652) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5652) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+npm ERR! Darwin 16.3.0
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+npm ERR! node v6.9.5
+npm ERR! npm  v3.10.10
+npm ERR! path /Users/admindyn/Desktop/backgroundmanagement-master/package.json
+npm ERR! code ENOENT
+npm ERR! errno -2
+npm ERR! syscall open
+
+npm ERR! enoent ENOENT: no such file or directory, open '/Users/admindyn/Desktop/backgroundmanagement-master/package.json'
+npm ERR! enoent ENOENT: no such file or directory, open '/Users/admindyn/Desktop/backgroundmanagement-master/package.json'
+npm ERR! enoent This is most likely not a problem with npm itself
+npm ERR! enoent and is related to npm not being able to find a file.
+npm ERR! enoent 
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /Users/admindyn/Desktop/backgroundmanagement-master/npm-debug.log
+
+缺少package.json
+
+制作该文件 
+
+在该目录下执行npm init
+
+bogon:backgroundmanagement-master admindyn$ npm init
+(node:5708) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5708) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5708) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:5708) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg> --save` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+name: (backgroundmanagement-master) 
+version: (1.0.0) 
+entry point: (index.js) 
+test command: 
+git repository: 
+keywords: test1
+author: dyn
+license: (ISC) UNLICENSED
+
+About to write to /Users/admindyn/Desktop/backgroundmanagement-master/package.json:
+
+{
+  "name": "backgroundmanagement-master",
+  "description": "```",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test1"
+  ],
+  "author": "dyn",
+  "license": "UNLICENSED"
+}
+
+
+Is this ok? (yes) 
+
+更改package.json
+
+{
+  "name": "backgroundmanagement-master",
+  "description": "```",
+  "version": "1.1.0",
+  "main": "./newexpress/app.js",
+  "scripts": {
+    "start": "node ./newexpress/bin/www"
+  },
+  "keywords": [
+    "test1"
+  ],
+  "author": "dyn",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "--"
+  }
+}
+
+比较原始的express框架 与 我们下载的源码之间的区别
+
+bogon:Desktop admindyn$ mkdir expressproject
+bogon:Desktop admindyn$ cd expressproject/
+bogon:expressproject admindyn$ express
+
+  warning: the default view engine will not be jade in future releases
+  warning: use `--view=jade' or `--help' for additional options
+
+
+   create : .
+   create : ./package.json
+   create : ./app.js
+   create : ./public
+   create : ./routes
+   create : ./routes/index.js
+   create : ./routes/users.js
+   create : ./views
+   create : ./views/index.jade
+   create : ./views/layout.jade
+   create : ./views/error.jade
+   create : ./bin
+   create : ./bin/www
+   create : ./public/javascripts
+   create : ./public/images
+   create : ./public/stylesheets
+   create : ./public/stylesheets/style.css
+
+   install dependencies:
+     $ cd . && npm install
+
+   run the app:
+     $ DEBUG=expressproject:* npm start
+
+bogon:expressproject admindyn$ 
+
+
+
+最后我们发现 要到
+
+我们下载的源码 要到 /Users/admindyn/Desktop/backgroundmanagement-master/newexpress/ 下去npm start 因为这里有package.json 和 app.js文件
+
+{
+  "name": "backgroundmanagement-master",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2"
+  }
+}
+
+npm start 依旧缺少node_modules文件
+
+bogon:newexpress admindyn$ sudo npm install express -g
+Password:
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6909) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+/usr/local/lib
+└─┬ express@4.15.2 
+  ├─┬ accepts@1.3.3 
+  │ ├─┬ mime-types@2.1.15 
+  │ │ └── mime-db@1.27.0 
+  │ └── negotiator@0.6.1 
+  ├── array-flatten@1.1.1 
+  ├── content-disposition@0.5.2 
+  ├── content-type@1.0.2 
+  ├── cookie@0.3.1 
+  ├── cookie-signature@1.0.6 
+  ├─┬ debug@2.6.1 
+  │ └── ms@0.7.2 
+  ├── depd@1.1.0 
+  ├── encodeurl@1.0.1 
+  ├── escape-html@1.0.3 
+  ├── etag@1.8.0 
+  ├─┬ finalhandler@1.0.1 
+  │ ├── debug@2.6.3 
+  │ └── unpipe@1.0.0 
+  ├── fresh@0.5.0 
+  ├── merge-descriptors@1.0.1 
+  ├── methods@1.1.2 
+  ├─┬ on-finished@2.3.0 
+  │ └── ee-first@1.1.1 
+  ├── parseurl@1.3.1 
+  ├── path-to-regexp@0.1.7 
+  ├─┬ proxy-addr@1.1.4 
+  │ ├── forwarded@0.1.0 
+  │ └── ipaddr.js@1.3.0 
+  ├── qs@6.4.0 
+  ├── range-parser@1.2.0 
+  ├─┬ send@0.15.1 
+  │ ├── destroy@1.0.4 
+  │ ├─┬ http-errors@1.6.1 
+  │ │ └── inherits@2.0.3 
+  │ └── mime@1.3.4 
+  ├── serve-static@1.12.1 
+  ├── setprototypeof@1.0.3 
+  ├── statuses@1.3.1 
+  ├─┬ type-is@1.6.15 
+  │ └── media-typer@0.3.0 
+  ├── utils-merge@1.0.0 
+  └── vary@1.1.1 
+
+bogon:newexpress admindyn$ npm start
+(node:6912) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6912) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6912) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:6912) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+
+> projectName@0.0.0 start /Users/admindyn/Desktop/backgroundmanagement-master/newexpress
+> node ./bin/www
+
+module.js:471
+    throw err;
+    ^
+
+Error: Cannot find module 'express'
+    at Function.Module._resolveFilename (module.js:469:15)
+    at Function.Module._load (module.js:417:25)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/app.js:1:77)
+    at Module._compile (module.js:570:32)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+
+npm ERR! Darwin 16.3.0
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+npm ERR! node v6.9.5
+npm ERR! npm  v3.10.10
+npm ERR! code ELIFECYCLE
+npm ERR! projectName@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the projectName@0.0.0 start script 'node ./bin/www'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the projectName package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node ./bin/www
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs projectName
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls projectName
+npm ERR! There is likely additional logging output above.
+npm WARN Local package.json exists, but node_modules missing, did you mean to install?
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /Users/admindyn/Desktop/backgroundmanagement-master/newexpress/npm-debug.log
+bogon:newexpress admindyn$ 
+ 
+ sudo npm install express -g 依旧缺少文件
+
+
+需要理解npm的node_modules的搜寻机制
+
+1、若请求的是内置模块如http、fs等，Node直接使用，无需搜寻
+
+2、如果请求的模块名称前包含路径参数如表示当前运行的.js文件所在的目录./或上一级目录../等，Node会到指定目录查找模块并尝试加载。如果未指定模块的扩展名.js，Node首先会查找匹配该名字的文件夹，如果未找到该文件夹，Node会自动为模块名加上.js，.json，.node并尝试依次加载指定类型的模块（以.node结尾的模块会被编译为附加模块）
+
+3、若请求的模块并未指定路径，Node首先会在当前路径下的node_modules/子文件夹下查找指定模块，若存在则加载，否则Node会在当前位置的路径树中查找node_modules/文件夹，若查找失败Node会到一些标准的默认位置继续查找，如/usr/lib或者/usr/local/lib
+
+4、如果Node仍搜寻失败，则抛错
+
+
+因此 我们到 源码的 newexpress目录下 创建node_modules
+
+执行 npm install express 就把express安装到本地路径
+
+同时app.js由于和node_modules在同一个目录下 不用修改 require的路径
+bogon:newexpress admindyn$ npm install express
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+(node:7137) fs: re-evaluating native module sources is not supported. If you are using the graceful-fs module, please update it to a more recent version.
+projectName@0.0.0 /Users/admindyn/Desktop/backgroundmanagement-master/newexpress
+└─┬ express@4.13.4 
+  ├─┬ accepts@1.2.13 
+  │ └── negotiator@0.5.3 
+  ├── content-disposition@0.5.1 
+  ├── cookie@0.1.5 
+  ├─┬ debug@2.2.0 
+  │ └── ms@0.7.1 
+  ├── etag@1.7.0 
+  ├── finalhandler@0.4.1 
+  ├── fresh@0.3.0 
+  ├─┬ proxy-addr@1.0.10 
+  │ └── ipaddr.js@1.0.5 
+  ├── qs@4.0.0 
+  ├── range-parser@1.0.3 
+  ├─┬ send@0.13.1 
+  │ ├── http-errors@1.3.1 
+  │ └── statuses@1.2.1 
+  ├─┬ serve-static@1.10.3 
+  │ └── send@0.13.2 
+  └── vary@1.0.1 
+
+bogon:newexpress admindyn$ 
