@@ -119,6 +119,41 @@ drwxr-xr-x@  3 admindyn  staff    102  4 13 16:57 util
 drwxr-xr-x@  5 admindyn  staff    170 11 10 19:31 views
 bogon:newexpress admindyn$ npm install jade
 
+
+第七步
+
+访问 mysql 报错
+/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/Parser.js:79
+        throw err; // Rethrow non-MySQL errors
+        ^
+
+TypeError: Cannot read property 'query' of undefined
+    at /Users/admindyn/Desktop/backgroundmanagement-master/newexpress/good/goodlist.js:50:23
+    at Handshake.onConnect (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/Pool.js:58:9)
+    at Handshake.Sequence.end (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/sequences/Sequence.js:86:24)
+    at Handshake.ErrorPacket (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/sequences/Handshake.js:105:8)
+    at Protocol._parsePacket (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/Protocol.js:280:23)
+    at Parser.write (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/Parser.js:75:12)
+    at Protocol.write (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+    at Socket.<anonymous> (/Users/admindyn/Desktop/backgroundmanagement-master/newexpress/node_modules/mysql/lib/Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+检查 源码下的express.sql 在本机数据库 建库 建表 插入初始数据
+
+注意源码下的conf 文件夹下 db.js 是所有目录使用mysql 模块是要用的mysql配置文件
+
+module.exports = {
+    mysql: {
+        host: 'localhost', 
+        user: 'root',
+        password: 'asd1453NMDmysql',
+        database:'test', // 前面建的user表位于些数据库中
+        port: 3306
+    }
+};
+
+修改 对应数据库名 数据库 账号 密码
+
 《第六步》
 切换到项目目录
 
