@@ -1,0 +1,36 @@
+express返回html文件
+【express返回html文件】
+
+　　app.engine(ext, callback) 方法即可创建一个你自己的模板引擎。其中，ext 指的是文件扩展名、callback 是模板引擎的主函数，接受文件路径、参数对象和回调函数作为其参数。　　　
+
+　　var fs = require('fs'); // 此模板引擎依赖 fs 模块
+app.engine('ntl', function (filePath, options, callback) { // 定义模板引擎
+  fs.readFile(filePath, function (err, content) {
+    if (err) return callback(new Error(err));
+    // 这是一个功能极其简单的模板引擎
+    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
+    .replace('#message#', '<h1>'+ options.message +'</h1>');
+    return callback(null, rendered);
+  })
+});
+app.set('views', './views'); // 指定视图所在的位置
+app.set('view engine', 'ntl'); // 注册模板引擎
+
+
+
+　　通常是使用jade或ejs来返回一个页面。
+
+　　
+
+　　若想直接返回一个原始html文件，添加一个新view engine即可，如下：
+
+　　
+
+如何渲染纯 HTML 文件？
+　　不需要！无需通过 res.render() 渲染 HTML。你可以通过 res.sendFile() 直接对外输出 HTML 文件。如果你需要对外提供的资源文件很多，可以使用 express.static() 中间件。
+
+参考：
+
+1、http://www.expressjs.com.cn/advanced/developing-template-engines.html
+
+2、http://www.tuicool.com/articles/6FfQNfI

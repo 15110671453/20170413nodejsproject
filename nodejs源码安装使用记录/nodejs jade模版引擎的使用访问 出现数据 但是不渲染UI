@@ -1,0 +1,120 @@
+nodejs 访问 出现数据 但是不渲染UI
+
+jade 使用前 确保npm 安装了node_modules中有jade 
+jade 模版引擎 不渲染
+发现没有安装 jade node_modules 支持 安装后
+macserver1:backgroundmanagement-master admindyn$ sudo npm install -g jade
+Password:
+npm WARN deprecated jade@1.11.0: Jade has been renamed to pug, please install the latest version of pug instead of jade
+npm WARN deprecated transformers@2.1.0: Deprecated, use jstransformer
+/usr/local/bin/jade -> /usr/local/lib/node_modules/jade/bin/jade.js
+/usr/local/lib
+└─┬ jade@1.11.0 
+  ├── character-parser@1.2.1 
+  ├─┬ clean-css@3.4.26 
+  │ ├─┬ commander@2.8.1 
+  │ │ └── graceful-readlink@1.0.1 
+  │ └─┬ source-map@0.4.4 
+  │   └── amdefine@1.0.1 
+  ├── commander@2.6.0 
+  ├─┬ constantinople@3.0.2 
+  │ └── acorn@2.7.0 
+  ├─┬ jstransformer@0.0.2 
+  │ ├── is-promise@2.1.0 
+  │ └─┬ promise@6.1.0 
+  │   └── asap@1.0.0 
+  ├─┬ mkdirp@0.5.1 
+  │ └── minimist@0.0.8 
+  ├─┬ transformers@2.1.0 
+  │ ├─┬ css@1.0.8 
+  │ │ ├── css-parse@1.0.4 
+  │ │ └── css-stringify@1.0.5 
+  │ ├─┬ promise@2.0.0 
+  │ │ └── is-promise@1.0.1 
+  │ └─┬ uglify-js@2.2.5 
+  │   ├─┬ optimist@0.3.7 
+  │   │ └── wordwrap@0.0.3 
+  │   └── source-map@0.1.43 
+  ├─┬ uglify-js@2.8.26 
+  │ ├── source-map@0.5.6 
+  │ ├── uglify-to-browserify@1.0.2 
+  │ └─┬ yargs@3.10.0 
+  │   ├── camelcase@1.2.1 
+  │   ├─┬ cliui@2.1.0 
+  │   │ ├─┬ center-align@0.1.3 
+  │   │ │ ├─┬ align-text@0.1.4 
+  │   │ │ │ ├─┬ kind-of@3.2.2 
+  │   │ │ │ │ └── is-buffer@1.1.5 
+  │   │ │ │ ├── longest@1.0.1 
+  │   │ │ │ └── repeat-string@1.6.1 
+  │   │ │ └── lazy-cache@1.0.4 
+  │   │ ├── right-align@0.1.3 
+  │   │ └── wordwrap@0.0.2 
+  │   ├── decamelize@1.2.0 
+  │   └── window-size@0.1.0 
+  ├── void-elements@2.0.1 
+  └─┬ with@4.0.3 
+    ├── acorn@1.2.2 
+    └── acorn-globals@1.0.9 
+
+macserver1:backgroundmanagement-master admindyn$ sudo npm install -g pug
+/usr/local/lib
+└─┬ pug@2.0.0-rc.1 
+  ├─┬ pug-code-gen@1.1.1 
+  │ ├─┬ constantinople@3.1.0 
+  │ │ ├── acorn@3.3.0 
+  │ │ └── is-expression@2.1.0 
+  │ ├── doctypes@1.1.0 
+  │ ├── js-stringify@1.0.2 
+  │ ├── pug-attrs@2.0.2 
+  │ ├── pug-error@1.3.2 
+  │ ├── void-elements@2.0.1 
+  │ └─┬ with@5.1.1 
+  │   └─┬ acorn-globals@3.1.0 
+  │     └── acorn@4.0.11 
+  ├─┬ pug-filters@2.1.2 
+  │ ├─┬ clean-css@3.4.26 
+  │ │ ├─┬ commander@2.8.1 
+  │ │ │ └── graceful-readlink@1.0.1 
+  │ │ └─┬ source-map@0.4.4 
+  │ │   └── amdefine@1.0.1 
+  │ ├─┬ jstransformer@1.0.0 
+  │ │ ├── is-promise@2.1.0 
+  │ │ └─┬ promise@7.1.1 
+  │ │   └── asap@2.0.5 
+  │ ├── pug-walk@1.1.2 
+  │ ├─┬ resolve@1.3.3 
+  │ │ └── path-parse@1.0.5 
+  │ └─┬ uglify-js@2.8.26 
+  │   ├── source-map@0.5.6 
+  │   ├── uglify-to-browserify@1.0.2 
+  │   └─┬ yargs@3.10.0 
+  │     ├── camelcase@1.2.1 
+  │     ├─┬ cliui@2.1.0 
+  │     │ ├─┬ center-align@0.1.3 
+  │     │ │ ├─┬ align-text@0.1.4 
+  │     │ │ │ ├─┬ kind-of@3.2.2 
+  │     │ │ │ │ └── is-buffer@1.1.5 
+  │     │ │ │ ├── longest@1.0.1 
+  │     │ │ │ └── repeat-string@1.6.1 
+  │     │ │ └── lazy-cache@1.0.4 
+  │     │ ├── right-align@0.1.3 
+  │     │ └── wordwrap@0.0.2 
+  │     ├── decamelize@1.2.0 
+  │     └── window-size@0.1.0 
+  ├─┬ pug-lexer@3.1.0 
+  │ ├─┬ character-parser@2.2.0 
+  │ │ └─┬ is-regex@1.0.4 
+  │ │   └─┬ has@1.0.1 
+  │ │     └── function-bind@1.1.0 
+  │ └─┬ is-expression@3.0.0 
+  │   └── acorn@4.0.11 
+  ├── pug-linker@3.0.0 
+  ├─┬ pug-load@2.0.6 
+  │ └── object-assign@4.1.1 
+  ├─┬ pug-parser@2.0.2 
+  │ └── token-stream@0.0.1 
+  ├── pug-runtime@2.0.3 
+  └── pug-strip-comments@1.0.2 
+
+macserver1:backgroundmanagement-master admindyn$
