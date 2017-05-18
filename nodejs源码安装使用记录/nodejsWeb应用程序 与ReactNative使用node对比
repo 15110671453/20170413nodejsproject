@@ -1,0 +1,119 @@
+nodejsWeb应用程序 与ReactNative使用node对比
+
+我们的nodejs web应用程序
+启动方式1:
+macserver1:newexpress admindyn$ npm start
+
+> projectName@0.0.0 start /Users/admindyn/Desktop/backgroundmanagement-master/newexpress
+> node ./bin/www
+
+start...
+/Users/admindyn/Desktop/backgroundmanagement-master/js/views
+www start... port 3100
+GET / 200 1367.132 ms - 1057
+GET /favicon.ico 404 24.528 ms - 1447
+
+启动方式2:
+backgroundmanagement-master网站
+
+第1步，在Desktop目录下创建一个backgroundmanagement-master目录。
+
+第2步，把下面的代码保存在package.json文件里：
+
+{
+  "name": "Visitor",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+  }
+}
+这个json文件描述了我们的backgroundmanagement-master网站的一些信息，最重要的部分是依赖。我们要使用express和jade。
+
+第3步，把下面的代码保存到app.js文件里：
+
+var express = require('express');
+var app = express();
+
+var counter = 0;
+
+// view engine setup
+app.set('views', './views');
+app.set('view engine', 'jade');
+app.engine('jade', require('jade').__express);
+
+app.get('/', function(req, res) {
+  counter++;
+  app.locals.counter = counter.toString();
+  res.render('index', {ip: req.ip});
+});
+
+app.listen(3000);
+
+app.locals.title = "Welcome to Visitor";
+app.locals.counter = "0";
+app.js文件是我们网站的入口。
+
+第4步，创建一个views目录，在里面创建一个模板文件index.jade，内容如下：
+
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    p Hello, #{ip}
+    p You're the #{counter} visitor.
+第5步，在backgroundmanagement-master目录里执行“npm install”，安装依赖。 （因为该目录下有package.json）
+
+第6步，在backgroundmanagement-master目录里执行“node app.js”，启动网站。
+
+最后呢，就可以在浏览器里访问了，地址栏里输入“http://localhost:3000”即可，刷新几次，你就看到界面了：
+
+
+注意：：第二大 对比
+
+/Users/admindyn/Desktop/工作/集分宝项目工作目录/ReactOC/Pods/React 下有 package.json
+
+对于ReactNative 工程 ReactOC 工程启动
+
+
+macserver1:~ admindyn$ cd /Users/admindyn/Desktop/工作/集分宝项目工作目录/ReactOC/
+macserver1:ReactOC admindyn$ JS_DIR=pwd/ReactComponent
+macserver1:ReactOC admindyn$ echo $JS_DIR
+pwd/ReactComponent
+macserver1:ReactOC admindyn$ cd Pods/React/
+macserver1:React admindyn$ npm run start --root $JS_DIR
+
+> react-native@0.11.0 start /Users/admindyn/Desktop/工作/集分宝项目工作目录/ReactOC/Pods/React
+> ./packager/packager.sh || true "pwd/ReactComponent"
+
+ ┌────────────────────────────────────────────────────────────────────────────┐ 
+ │  Running packager on port 8081.                                            │ 
+ │                                                                            │ 
+ │  Keep this packager running while developing on any JS projects. Feel      │ 
+ │  free to close this tab and run your own packager instance if you          │ 
+ │  prefer.                                                                   │ 
+ │                                                                            │ 
+ │  https://github.com/facebook/react-native                                  │ 
+ │                                                                            │ 
+ └────────────────────────────────────────────────────────────────────────────┘ 
+Looking for JS files in
+   /Users/admindyn/Desktop/工作/集分宝项目工作目录/ReactOC 
+
+
+React packager ready.
+
+[10:33:21] <START> Building Dependency Graph
+[10:33:21] <START> Crawling File System
+[10:33:23] <END>   Crawling File System (1505ms)
+[10:33:23] <START> Building in-memory fs for JavaScript
+[10:33:23] <END>   Building in-memory fs for JavaScript (324ms)
+[10:33:23] <START> Building in-memory fs for Assets
+[10:33:23] <END>   Building in-memory fs for Assets (294ms)
+[10:33:23] <START> Building Haste Map
+[10:33:24] <START> Building (deprecated) Asset Map
+[10:33:24] <END>   Building (deprecated) Asset Map (86ms)
+[10:33:24] <END>   Building Haste Map (674ms)
+[10:33:24] <END>   Building Dependency Graph (2797ms)
